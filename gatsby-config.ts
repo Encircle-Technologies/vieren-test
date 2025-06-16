@@ -4,7 +4,7 @@ require("dotenv").config({ path: `.env` })
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
+const isNetlify = process.env.NETLIFY === 'true'
 const config: GatsbyConfig = {
   flags: {
     // DEV_SSR: true,
@@ -119,9 +119,9 @@ const config: GatsbyConfig = {
         },
         schema: {
           timeout: 600000,
-          perPage: 20,
-          requestConcurrency: 5,
-          previewRequestConcurrency: 3,
+          perPage: isNetlify ? 10 : 20,
+          requestConcurrency: isNetlify ? 3 : 5,
+          previewRequestConcurrency: isNetlify ? 2 : 3,
         },
         type: {
           Category: {
@@ -248,13 +248,17 @@ const config: GatsbyConfig = {
         },
       },
     },
-    {
-      resolve: "gatsby-plugin-sharp",
-      options: {
-        defaults: {},
-        failOn: "none",
-      },
+    ...(!isNetlify ? [
+  {
+    resolve: "gatsby-plugin-sharp",
+    options: {
+      defaults: {},
+      failOn: "none",
     },
+  },
+  "gatsby-transformer-sharp",
+  "gatsby-plugin-image",
+] : []),
     "gatsby-transformer-sharp",
     "gatsby-plugin-image",
     "gatsby-plugin-styled-components",
