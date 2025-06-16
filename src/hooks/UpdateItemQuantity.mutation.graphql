@@ -1,0 +1,32 @@
+mutation UPDATE_ITEM_QUANTITY($input: UpdateItemQuantitiesInput!) {
+  updateItemQuantities(input: $input) {
+    updated {
+      __typename
+      key
+      quantity
+      subtotal
+    }
+    removed {
+      __typename
+      key
+    }
+    cart {
+      isEmpty
+      contents {
+        itemCount
+      }
+      subtotalTax
+      discountTax
+      contentsTax
+      feeTax
+      shippingTax
+      totalTax
+      subtotal
+      discountTotal
+      contentsTotal
+      feeTotal
+      shippingTotal
+      total
+    }
+  }
+}

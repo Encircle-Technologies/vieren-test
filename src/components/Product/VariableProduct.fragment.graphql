@@ -1,0 +1,11 @@
+fragment VariableProductData on VariableProduct {
+  __typename
+  id
+  databaseId
+  price
+  salePrice
+  regularPrice
+  stockStatus
+  stockQuantity
+  manageStock
+}

@@ -1,0 +1,11 @@
+fragment SimpleProductData on SimpleProduct {
+  __typename
+  id
+  databaseId
+  price
+  salePrice
+  regularPrice
+  stockStatus
+  stockQuantity
+  manageStock
+}

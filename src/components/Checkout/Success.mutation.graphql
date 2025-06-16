@@ -1,0 +1,7 @@
+mutation EMPTY_CART($input: EmptyCartInput!) {
+  emptyCart(input: $input) {
+    cart {
+      isEmpty
+    }
+  }
+}

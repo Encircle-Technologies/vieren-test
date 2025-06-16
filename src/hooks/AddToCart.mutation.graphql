@@ -1,0 +1,14 @@
+#import "../components/Cart/Item.fragment.graphql"
+
+mutation ADD_TO_CART($input: AddToCartInput!) {
+  addToCart(input: $input) {
+    cartItem {
+      ...CartItemData
+    }
+    cart {
+      contents {
+        itemCount
+      }
+    }
+  }
+}

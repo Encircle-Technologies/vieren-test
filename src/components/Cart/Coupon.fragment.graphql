@@ -1,0 +1,7 @@
+fragment CartCouponData on Cart {
+  appliedCoupons {
+    code
+    discountAmount
+    discountTax
+  }
+}

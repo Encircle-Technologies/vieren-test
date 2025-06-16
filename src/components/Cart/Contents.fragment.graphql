@@ -1,0 +1,12 @@
+#import "./Item.fragment.graphql"
+
+fragment CartContentsData on Cart {
+  __typename
+  isEmpty
+  contents {
+    itemCount
+    nodes {
+      ...CartItemData
+    }
+  }
+}

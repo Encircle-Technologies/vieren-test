@@ -1,0 +1,10 @@
+fragment ImageData on MediaItem {
+  id
+  altText
+  mediaItemUrl
+  mediaDetails {
+    file
+    width
+    height
+  }
+}

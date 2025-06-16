@@ -1,0 +1,21 @@
+fragment VariantData on ProductVariation {
+  __typename
+  id
+  databaseId
+  name
+  description
+  sku
+  attributes {
+    nodes {
+      name
+      value
+    }
+  }
+  onSale
+  price
+  salePrice
+  regularPrice
+  stockStatus
+  stockQuantity
+  manageStock
+}

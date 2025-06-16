@@ -1,0 +1,9 @@
+#import "../components/Product/DynamicProductData.fragment.graphql"
+
+query GetAllPricesQuery {
+  products(first: 100) {
+    nodes {
+      ...DynamicProductData
+    }
+  }
+}

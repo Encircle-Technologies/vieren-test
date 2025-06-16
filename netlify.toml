@@ -1,0 +1,10 @@
+[dev]
+  command="yarn develop"
+  functions="static/functions"
+  targetPort=8000
+
+[build]
+  functions="static/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-gatsby"

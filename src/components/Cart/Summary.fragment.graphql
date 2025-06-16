@@ -1,0 +1,24 @@
+fragment CartSummaryData on Cart {
+  subtotalTax
+  discountTax
+  contentsTax
+  feeTax
+  shippingTax
+  totalTax
+  totalTaxes {
+    ...TaxItemData
+  }
+  subtotal
+  discountTotal
+  contentsTotal
+  feeTotal
+  shippingTotal
+  total
+}
+
+fragment TaxItemData on CartTax {
+  id
+  label
+  isCompound
+  amount
+}

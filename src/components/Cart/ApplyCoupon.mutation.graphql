@@ -1,0 +1,15 @@
+#import "./Coupon.fragment.graphql"
+#import "./Summary.fragment.graphql"
+
+mutation APPLY_COUPON($input: ApplyCouponInput!) {
+  applyCoupon(input: $input) {
+    cart {
+      appliedCoupons {
+        nodes {
+          ...CouponData
+        }
+      }
+      ...CartSummaryData
+    }
+  }
+}

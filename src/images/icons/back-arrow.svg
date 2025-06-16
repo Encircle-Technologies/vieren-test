@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31" height="10" viewBox="0 0 31 10" fill="none" fill-rule="evenodd" stroke="currentColor"  stroke-linecap="square">
+    <path d="M24 0L29 5" transform="translate(-81 -21) translate(80 20) matrix(-1 0 0 1 33 0) translate(2 1)"/>
+    <path d="M24 5L29 10" transform="translate(-81 -21) translate(80 20) matrix(-1 0 0 1 33 0) translate(2 1) matrix(1 0 0 -1 0 15)"/>
+    <path d="M0 5L28 5" transform="translate(-81 -21) translate(80 20) matrix(-1 0 0 1 33 0) translate(2 1)"/>
+</svg>

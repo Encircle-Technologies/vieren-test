@@ -1,0 +1,15 @@
+fragment CartShippingData on Cart {
+  needsShippingAddress
+  chosenShippingMethods
+  availableShippingMethods {
+    packageDetails
+    supportsShippingCalculator
+    rates {
+      id
+      methodId
+      instanceId
+      label
+      cost
+    }
+  }
+}

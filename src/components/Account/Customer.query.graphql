@@ -1,0 +1,46 @@
+#import "./Address.fragment.graphql"
+#import "./Customer.fragment.graphql"
+#import "../Order/Order.fragment.graphql"
+
+query GET_CUSTOMER(
+  $id: ID!
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+  $orderby: [OrdersOrderbyInput]
+) {
+  user(id: $id) {
+    id
+    description
+  }
+  customer(id: $id) {
+    ...CustomerData
+    shipping {
+      ...CustomerAddressData
+    }
+    billing {
+      ...CustomerAddressData
+    }
+    lastOrder {
+      ...OrderData
+    }
+    orders(
+      first: $first
+      after: $after
+      last: $last
+      before: $before
+      where: { orderby: $orderby }
+    ) {
+      nodes {
+        ...OrderData
+      }
+      pageInfo {
+        startCursor
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+}

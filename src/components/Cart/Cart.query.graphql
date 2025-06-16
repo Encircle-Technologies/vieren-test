@@ -1,0 +1,11 @@
+#import "./Contents.fragment.graphql"
+#import "./Summary.fragment.graphql"
+#import "./Coupon.fragment.graphql"
+
+query GET_CART {
+  cart {
+    ...CartContentsData
+    ...CartCouponData
+    ...CartSummaryData
+  }
+}

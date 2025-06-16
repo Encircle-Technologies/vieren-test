@@ -1,0 +1,54 @@
+#import "../Product/SimpleProduct.fragment.graphql"
+#import "../Product/VariableProduct.fragment.graphql"
+#import "../Product/Variation.fragment.graphql"
+
+fragment OrderItemData on LineItem {
+  orderId
+  databaseId
+  metaData {
+    id
+    key
+    value
+  }
+  product {
+    node {
+      __typename
+      id
+      databaseId
+      name
+      slug
+      sku
+      onSale
+      image {
+        ...ImageData
+      }
+      productCategories {
+        nodes {
+          id
+          name
+        }
+      }
+      productStatuses {
+        nodes {
+          databaseId
+          name
+        }
+      }
+      collections {
+        nodes {
+          id
+          name
+        }
+      }
+      ...SimpleProductData
+      ...VariableProductData
+    }
+  }
+  variation {
+    node {
+      ...VariationData
+    }
+  }
+  quantity
+  subtotal
+}

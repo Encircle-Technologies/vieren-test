@@ -1,0 +1,71 @@
+#import "../Account/Address.fragment.graphql"
+#import "./Item.fragment.graphql"
+
+fragment OrderData on Order {
+  id
+  databaseId
+  orderKey
+  orderNumber
+  orderVersion
+  createdVia
+  customerIpAddress
+  customerUserAgent
+  customerNote
+  customer {
+    id
+    email
+    firstName
+    lastName
+  }
+  date
+  datePaid
+  dateCompleted
+  modified
+  status
+  hasBillingAddress
+  hasShippingAddress
+  needsShippingAddress
+  shippingAddressMapUrl
+  hasDownloadableItem
+  isDownloadPermitted
+  needsProcessing
+  needsPayment
+  paymentMethod
+  paymentMethodTitle
+  transactionId
+  pricesIncludeTax
+  currency
+  cartHash
+  taxLines {
+    nodes {
+      databaseId
+      isCompound
+      label
+      orderId
+      rateCode
+      shippingTaxTotal
+      taxTotal
+    }
+  }
+  cartTax
+  discountTax
+  shippingTax
+  totalTax
+  subtotal
+  discountTotal
+  shippingTotal
+  total
+  currency
+  customerNote
+  billing {
+    ...CustomerAddressData
+  }
+  shipping {
+    ...CustomerAddressData
+  }
+  lineItems {
+    nodes {
+      ...OrderItemData
+    }
+  }
+}

@@ -1,0 +1,18 @@
+fragment StockData on Product {
+  ... on SimpleProduct {
+    stockStatus
+    stockQuantity
+    manageStock
+  }
+  ... on VariableProduct {
+    variations {
+      nodes {
+        __typename
+        id
+        stockStatus
+        stockQuantity
+        manageStock
+      }
+    }
+  }
+}

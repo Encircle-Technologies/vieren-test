@@ -1,0 +1,11 @@
+#import "./Shipping.fragment.graphql"
+#import "../Cart/Summary.fragment.graphql"
+
+mutation UPDATE_SHIPPING_METHOD($input: UpdateShippingMethodInput!) {
+  updateShippingMethod(input: $input) {
+    cart {
+      ...CartShippingData
+      ...CartSummaryData
+    }
+  }
+}

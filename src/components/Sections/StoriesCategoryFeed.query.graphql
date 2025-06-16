@@ -1,0 +1,90 @@
+#import "../Elements/Image.fragment.graphql"
+#import "../Elements/Video.fragment.graphql"
+
+query GetStoriesByCategory(
+  $id: Int
+  $sortBy: PostObjectsConnectionOrderbyEnum!
+  $sortOrder: OrderEnum!
+  $count: Int
+  $cursor: String
+) {
+  posts(
+    where: {
+      categoryId: $id
+      status: PUBLISH
+      orderby: { field: $sortBy, order: $sortOrder }
+    }
+    first: $count
+    after: $cursor
+  ) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    nodes {
+      ... on Post {
+        id
+        uri
+        categories {
+          nodes {
+            id
+            name
+            slug
+          }
+        }
+        ACFPost {
+          featured
+        }
+        template {
+          ... on Template_2021Default {
+            ACF2021 {
+              related {
+                headline
+                description
+                kind
+                image {
+                  desktop {
+                    ...ImageData
+                  }
+                  mobile {
+                    ...ImageData
+                  }
+                }
+                hasHover
+                hoverImage {
+                  image {
+                    desktop {
+                      ...ImageData
+                    }
+                    mobile {
+                      ...ImageData
+                    }
+                  }
+                }
+                video {
+                  poster {
+                    desktop {
+                      ...ImageData
+                    }
+                    mobile {
+                      ...ImageData
+                    }
+                  }
+                  media {
+                    desktop {
+                      ...VideoData
+                    }
+                    mobile {
+                      ...VideoData
+                    }
+                  }
+                  options
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mutation FillCartMutation($input: FillCartInput!) {
+  fillCart(input: $input) {
+    cartErrors {
+      type
+      reasons
+    }
+  }
+}

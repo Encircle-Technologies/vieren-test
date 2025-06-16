@@ -1,0 +1,6 @@
+query GetViewerQuery {
+  viewer {
+    __typename
+    id
+  }
+}

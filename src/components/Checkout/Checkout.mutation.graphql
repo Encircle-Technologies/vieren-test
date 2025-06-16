@@ -1,0 +1,15 @@
+#import "../Account/Customer.fragment.graphql"
+#import "../Order/Order.fragment.graphql"
+
+mutation CHECKOUT($input: CheckoutInput!) {
+  checkout(input: $input) {
+    customer {
+      ...CustomerData
+    }
+    order {
+      ...OrderData
+    }
+    redirect
+    result
+  }
+}

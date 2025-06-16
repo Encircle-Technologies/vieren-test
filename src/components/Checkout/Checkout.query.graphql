@@ -1,0 +1,13 @@
+#import "../Cart/Contents.fragment.graphql"
+#import "../Cart/Summary.fragment.graphql"
+#import "../Cart/Coupon.fragment.graphql"
+#import "./Shipping.fragment.graphql"
+
+query GET_CART_FOR_CHECKOUT {
+  cart(recalculateTotals: true) {
+    ...CartContentsData
+    ...CartShippingData
+    ...CartCouponData
+    ...CartSummaryData
+  }
+}

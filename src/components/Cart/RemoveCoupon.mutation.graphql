@@ -1,0 +1,15 @@
+#import "./Coupon.fragment.graphql"
+#import "./Summary.fragment.graphql"
+
+mutation REMOVE_COUPON($input: RemoveCouponsInput!) {
+  removeCoupons(input: $input) {
+    cart {
+      appliedCoupons {
+        nodes {
+          ...CouponData
+        }
+      }
+      ...CartSummaryData
+    }
+  }
+}

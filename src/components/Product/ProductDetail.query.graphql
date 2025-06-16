@@ -1,0 +1,12 @@
+#import "./Price.fragment.graphql"
+#import "./Stock.fragment.graphql"
+
+query GET_DYNAMIC_PRODUCT_DATA($id: ID!) {
+  product(id: $id, idType: DATABASE_ID) {
+    __typename
+    id
+    databaseId
+    ...PriceData
+    ...StockData
+  }
+}

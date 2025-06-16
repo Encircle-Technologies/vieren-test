@@ -1,0 +1,8 @@
+fragment VideoData on MediaItem {
+  mimeType
+  mediaDetails {
+    height
+    width
+  }
+  mediaItemUrl
+}

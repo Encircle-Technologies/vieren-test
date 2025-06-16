@@ -1,0 +1,22 @@
+fragment CustomerData on Customer {
+  id
+  databaseId
+  date
+  modified
+  firstName
+  lastName
+  displayName
+  username
+  email
+  metaData {
+    id
+    key
+    value
+  }
+  isPayingCustomer
+  isVatExempt
+  calculatedShipping
+  hasCalculatedShipping
+  orderCount
+  totalSpent
+}

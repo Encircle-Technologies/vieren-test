@@ -1,0 +1,18 @@
+#import "./SimpleProduct.fragment.graphql"
+#import "./VariableProduct.fragment.graphql"
+#import "./Variant.fragment.graphql"
+
+fragment DynamicProductData on Product {
+  __typename
+  id
+  databaseId
+  ...SimpleProductData
+  ...VariableProductData
+  ... on VariableProduct {
+    variations {
+      nodes {
+        ...VariantData
+      }
+    }
+  }
+}
