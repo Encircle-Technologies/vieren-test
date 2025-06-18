@@ -19,6 +19,11 @@ const Content = ({ productFields, layouts }) => {
 }
 
 export default function ProductPage({ data }) {
+
+  const isPreview =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("gatsby_preview") === "true"
+    
   const preOrderProducts = data?.wp?.preorder?.content?.productPages
 
   const isPreOrder =

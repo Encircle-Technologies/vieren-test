@@ -4,6 +4,11 @@ import { getLayouts } from "../utils/layout/layouts"
 import Head from "../components/Layout/Head"
 
 export default function Post({ data }) {
+
+  const isPreview =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("gatsby_preview") === "true"
+    
   if (data?.wpPost?.template?.__typename === "WpTemplate_2021Default") {
     return (
       <>
