@@ -98,6 +98,12 @@ const config: GatsbyConfig = {
       resolve: "gatsby-source-wordpress",
       options: {
         url: "https://vieren-cms-prod.zuratech.ca/graphql",
+        auth: {
+          htaccess: {
+            username: process.env.WP_USERNAME,
+            password: process.env.WP_PASSWORD,
+          },
+        },
         verbose: true,
         debug: {
           preview: true,

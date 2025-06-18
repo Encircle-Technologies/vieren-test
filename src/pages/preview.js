@@ -1,32 +1,59 @@
-import React, { useEffect } from "react"
-import { navigate } from "gatsby"
-import { usePreviewNode } from "../hooks/usePreviewNode"
-import DOMPurify from "dompurify"
+// src/pages/preview.js
+
+import React, { useEffect, useState } from "react"
+import { useLocation, navigate } from "@reach/router"
 
 const PreviewPage = () => {
+  const [post, setPost] = useState(null)
+  const location = useLocation()
 
-  const { node, loading, error } = usePreviewNode()
+  // Parse query params
+  const params = new URLSearchParams(location.search)
+  const slug = params.get("slug")
+  const type = params.get("type")
 
   useEffect(() => {
-    if (node?.uri) {
-      navigate(`${node.uri}?preview=true`)
+    if (!slug || !type) return
+
+    const fetchPreviewData = async () => {
+      try {
+        const res = await fetch(process.env.GATSBY_WPGRAPHQL_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.GATSBY_JWT_PREVIEW_TOKEN}`,
+          },
+          body: JSON.stringify({
+            query: `
+              query GetPreviewContent {
+                ${type}(id: "${slug}", idType: SLUG, asPreview: true) {
+                  title
+                  content
+                }
+              }
+            `
+          }),
+        })
+
+        const result = await res.json()
+        setPost(result.data?.[type] || null)
+      } catch (e) {
+        console.error("Error fetching preview data:", e)
+        navigate("/") // fallback if error
+      }
     }
-  }, [node])
 
-  if (loading) return <p>Loading preview...</p>
+    fetchPreviewData()
+  }, [slug, type])
 
-  if (error) {
-    return (
-      <p style={{ color: "red" }}>
-        Preview Error:{" "}
-        {typeof error === "string"
-          ? DOMPurify.sanitize(error)
-          : "An unknown error occurred."}
-      </p>
-    )
-  }
+  if (!post) return <p>Loading preview...</p>
 
-  return <p>Redirecting...</p>
+  return (
+    <main>
+      <h1>{post.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </main>
+  )
 }
 
 export default PreviewPage
