@@ -100,8 +100,8 @@ const config: GatsbyConfig = {
         url: "https://vieren-cms-prod.zuratech.ca/graphql",
         auth: {
           htaccess: {
-            username: process.env.WP_USERNAME,
-            password: process.env.WP_PASSWORD,
+            username: 'crea8ivedev@gmail.com',
+            password: 'JustWork@989',
           },
         },
         verbose: true,
