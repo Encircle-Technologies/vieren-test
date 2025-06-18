@@ -5,6 +5,11 @@ import { getLayouts } from "../utils/layout/layouts"
 import Head from "../components/Layout/Head"
 
 export default function Page({ location, data }) {
+  const isPreview =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("gatsby_preview") === "true"
+
+    
   useEffect(() => {
     if (location.pathname.includes("/shop")) {
       trackPLPView()
