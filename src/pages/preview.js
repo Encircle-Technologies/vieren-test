@@ -1,33 +1,32 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { navigate } from "gatsby"
-import { useLocation } from "@reach/router"
+import { usePreviewNode } from "../hooks/usePreviewNode"
+import DOMPurify from "dompurify"
 
 const PreviewPage = () => {
-  const location = useLocation()
-  const [loading, setLoading] = useState(true)
+
+  const { node, loading, error } = usePreviewNode()
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    const slug = params.get("slug")
-    const type = params.get("type") // 'page' or 'post' or custom
-    const previewToken = params.get("gatsby_preview") 
-
-    if (slug && previewToken) {
-      // Assuming your site uses pretty URLs
-      navigate(`/${slug}/?gatsby_preview=true`, { replace: true })
-    } else {
-      // fallback
-      navigate("/", { replace: true })
+    if (node?.uri) {
+      navigate(`${node.uri}?preview=true`)
     }
+  }, [node])
 
-    setLoading(false)
-  }, [location])
+  if (loading) return <p>Loading preview...</p>
 
-  return (
-    <main style={{ padding: "2rem" }}>
-      {loading ? <p>Loading preview...</p> : <p>Redirecting...</p>}
-    </main>
-  )
+  if (error) {
+    return (
+      <p style={{ color: "red" }}>
+        Preview Error:{" "}
+        {typeof error === "string"
+          ? DOMPurify.sanitize(error)
+          : "An unknown error occurred."}
+      </p>
+    )
+  }
+
+  return <p>Redirecting...</p>
 }
 
 export default PreviewPage

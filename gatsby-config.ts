@@ -95,21 +95,9 @@ const config: GatsbyConfig = {
       },
     },
     {
-  resolve: `gatsby-plugin-gatsby-cloud`,
-  options: {
-    generateMatchPathRewrites: true
-  }
-},
-    {
       resolve: "gatsby-source-wordpress",
       options: {
         url: "https://vieren-cms-prod.zuratech.ca/graphql",
-        auth: {
-          htaccess: {
-            username: 'crea8ivedev@gmail.com',
-            password: 'JustWork@989',
-          },
-        },
         verbose: true,
         debug: {
           preview: true,
