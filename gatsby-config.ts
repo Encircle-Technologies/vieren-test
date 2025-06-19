@@ -118,11 +118,11 @@ const config: GatsbyConfig = {
           allow401Images: true,
         },
         schema: {
-          timeout: 600000,
-          perPage: isNetlify ? 10 : 20,
-          requestConcurrency: isNetlify ? 3 : 5,
-          previewRequestConcurrency: isNetlify ? 2 : 3,
-        },
+  timeout: 600000,
+  perPage: isNetlify ? 5 : 20,            // reduce page chunking
+  requestConcurrency: isNetlify ? 1 : 5,   // one request at a time
+  previewRequestConcurrency: isNetlify ? 1 : 3,
+},
         type: {
           Category: {
             excludeFieldNames: [
