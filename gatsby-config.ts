@@ -5,6 +5,9 @@ dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 const isNetlify = process.env.NETLIFY === 'true'
+
+const isPreviewServer = process.env.NETLIFY_DEV === 'true'
+
 const config: GatsbyConfig = {
   flags: {
     // DEV_SSR: true,
@@ -119,10 +122,11 @@ const config: GatsbyConfig = {
         },
         schema: {
   timeout: 600000,
-  perPage: isNetlify ? 5 : 20,            // reduce page chunking
-  requestConcurrency: isNetlify ? 1 : 5,   // one request at a time
-  previewRequestConcurrency: isNetlify ? 1 : 3,
+  perPage: isPreviewServer ? 5 : 20,
+  requestConcurrency: isPreviewServer ? 1 : 5,
+  previewRequestConcurrency: isPreviewServer ? 1 : 3,
 },
+
         type: {
           Category: {
             excludeFieldNames: [
@@ -152,7 +156,7 @@ const config: GatsbyConfig = {
             excludeFieldNames: [`contentNodes`, `gifts`],
           },
           MediaItem: {
-            createFileNodes: false,
+            createFileNodes: !isPreviewServer,
             excludeFieldNames: [
               `ancestors`,
               "children",
