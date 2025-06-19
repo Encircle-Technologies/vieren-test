@@ -10,7 +10,7 @@ const PreviewPage = () => {
     const params = new URLSearchParams(location.search)
     const slug = params.get("slug")
     const type = params.get("type") // 'page' or 'post' or custom
-    const previewToken = params.get("gatsby_preview")
+    const previewToken = params.get("gatsby_preview") 
 
     if (slug && previewToken) {
       // Assuming your site uses pretty URLs
