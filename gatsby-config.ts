@@ -156,7 +156,7 @@ const config: GatsbyConfig = {
             excludeFieldNames: [`contentNodes`, `gifts`],
           },
           MediaItem: {
-            createFileNodes: !isPreviewServer,
+            createFileNodes: false,
             excludeFieldNames: [
               `ancestors`,
               "children",
