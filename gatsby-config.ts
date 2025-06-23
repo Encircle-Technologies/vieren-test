@@ -104,36 +104,36 @@ const config: GatsbyConfig = {
     {
        resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://vieren-cms-prod.zuratech.ca/graphql",
-        verbose: true,
-        debug: {
-          preview: isPreviewMode, // Enable preview mode
-          timeBuildSteps: true,
-          graphql: {
-            showQueryVarsOnError: true,
-            showQueryOnError: true,
-            writeQueriesToDisk: true,
-          },
-        },
-        develop: {
-          hardCacheData: !isPreviewMode, // Disable cache for preview
-          hardCacheMediaFiles: !isPreviewMode,
-        },
-        production: {
-          hardCacheMediaFiles: true,
-          allow404Images: true,
-          allow401Images: true,
-        },
-        // Enhanced preview configuration
-        preview: {
-          sourceNodeName: "allWpContentNode",
-        },
-        schema: {
-          timeout: 600000,
-          perPage: isPreviewServer ? 5 : 20,
-          requestConcurrency: isPreviewServer ? 1 : 5,
-          previewRequestConcurrency: isPreviewServer ? 1 : 3,
-        },
+    url: process.env.GATSBY_GRAPHQL_URL, // Using your existing variable
+    verbose: true,
+    debug: {
+      preview: isPreviewMode, // Enable preview mode conditionally
+      timeBuildSteps: true,
+      graphql: {
+        showQueryVarsOnError: true,
+        showQueryOnError: true,
+        writeQueriesToDisk: true,
+      },
+    },
+    develop: {
+      hardCacheData: !isPreviewMode, // Disable cache when in preview mode
+      hardCacheMediaFiles: !isPreviewMode,
+    },
+    production: {
+      hardCacheMediaFiles: true,
+      allow404Images: true,
+      allow401Images: true,
+    },
+    // Add preview configuration
+    preview: {
+      sourceNodeName: "allWpContentNode",
+    },
+    schema: {
+      timeout: 600000,
+      perPage: isPreviewServer ? 5 : 20,
+      requestConcurrency: isPreviewServer ? 1 : 5,
+      previewRequestConcurrency: isPreviewServer ? 1 : 3,
+    },
         type: {
           Category: {
             excludeFieldNames: [
