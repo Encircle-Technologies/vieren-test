@@ -4,9 +4,13 @@ require("dotenv").config({ path: `.env` })
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-const isNetlify = process.env.NETLIFY === 'true'
+// const isNetlify = process.env.NETLIFY === 'true'
 
+// const isPreviewServer = process.env.NETLIFY_DEV === 'true'
+
+const isNetlify = process.env.NETLIFY === 'true'
 const isPreviewServer = process.env.NETLIFY_DEV === 'true'
+const isPreviewMode = process.env.GATSBY_PREVIEW_MODE === 'true'
 
 const config: GatsbyConfig = {
   flags: {
@@ -98,12 +102,12 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-source-wordpress",
+       resolve: "gatsby-source-wordpress",
       options: {
         url: "https://vieren-cms-prod.zuratech.ca/graphql",
         verbose: true,
         debug: {
-          preview: true,
+          preview: isPreviewMode, // Enable preview mode
           timeBuildSteps: true,
           graphql: {
             showQueryVarsOnError: true,
@@ -112,21 +116,24 @@ const config: GatsbyConfig = {
           },
         },
         develop: {
-          hardCacheData: true,
-          hardCacheMediaFiles: true,
+          hardCacheData: !isPreviewMode, // Disable cache for preview
+          hardCacheMediaFiles: !isPreviewMode,
         },
         production: {
           hardCacheMediaFiles: true,
           allow404Images: true,
           allow401Images: true,
         },
+        // Enhanced preview configuration
+        preview: {
+          sourceNodeName: "allWpContentNode",
+        },
         schema: {
-  timeout: 600000,
-  perPage: isPreviewServer ? 5 : 20,
-  requestConcurrency: isPreviewServer ? 1 : 5,
-  previewRequestConcurrency: isPreviewServer ? 1 : 3,
-},
-
+          timeout: 600000,
+          perPage: isPreviewServer ? 5 : 20,
+          requestConcurrency: isPreviewServer ? 1 : 5,
+          previewRequestConcurrency: isPreviewServer ? 1 : 3,
+        },
         type: {
           Category: {
             excludeFieldNames: [
