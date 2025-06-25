@@ -65926,20 +65926,35 @@ type WpProductPage_Acfproduct_mGallery_Video_PosterSortInput = {
 
 /** The reading setting type */
 type WpReadingSettings = {
+  /** The ID of the page that should display the latest posts */
+  readonly pageForPosts: Maybe<Scalars['Int']>;
+  /** The ID of the page that should be displayed on the front page */
+  readonly pageOnFront: Maybe<Scalars['Int']>;
   /** Blog pages show at most. */
   readonly postsPerPage: Maybe<Scalars['Int']>;
+  /** What to show on the front page */
+  readonly showOnFront: Maybe<Scalars['String']>;
 };
 
 type WpReadingSettingsFieldSelector = {
+  readonly pageForPosts: InputMaybe<FieldSelectorEnum>;
+  readonly pageOnFront: InputMaybe<FieldSelectorEnum>;
   readonly postsPerPage: InputMaybe<FieldSelectorEnum>;
+  readonly showOnFront: InputMaybe<FieldSelectorEnum>;
 };
 
 type WpReadingSettingsFilterInput = {
+  readonly pageForPosts: InputMaybe<IntQueryOperatorInput>;
+  readonly pageOnFront: InputMaybe<IntQueryOperatorInput>;
   readonly postsPerPage: InputMaybe<IntQueryOperatorInput>;
+  readonly showOnFront: InputMaybe<StringQueryOperatorInput>;
 };
 
 type WpReadingSettingsSortInput = {
+  readonly pageForPosts: InputMaybe<SortOrderEnum>;
+  readonly pageOnFront: InputMaybe<SortOrderEnum>;
   readonly postsPerPage: InputMaybe<SortOrderEnum>;
+  readonly showOnFront: InputMaybe<SortOrderEnum>;
 };
 
 /** All of the registered settings */
@@ -65967,7 +65982,13 @@ type WpSettings = {
   /** Settings of the the string Settings Group */
   readonly generalSettingsUrl: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
+  readonly readingSettingsPageForPosts: Maybe<Scalars['Int']>;
+  /** Settings of the the integer Settings Group */
+  readonly readingSettingsPageOnFront: Maybe<Scalars['Int']>;
+  /** Settings of the the integer Settings Group */
   readonly readingSettingsPostsPerPage: Maybe<Scalars['Int']>;
+  /** Settings of the the string Settings Group */
+  readonly readingSettingsShowOnFront: Maybe<Scalars['String']>;
   /** Settings of the the integer Settings Group */
   readonly writingSettingsDefaultCategory: Maybe<Scalars['Int']>;
   /** Settings of the the string Settings Group */
@@ -65988,7 +66009,10 @@ type WpSettingsFieldSelector = {
   readonly generalSettingsTimezone: InputMaybe<FieldSelectorEnum>;
   readonly generalSettingsTitle: InputMaybe<FieldSelectorEnum>;
   readonly generalSettingsUrl: InputMaybe<FieldSelectorEnum>;
+  readonly readingSettingsPageForPosts: InputMaybe<FieldSelectorEnum>;
+  readonly readingSettingsPageOnFront: InputMaybe<FieldSelectorEnum>;
   readonly readingSettingsPostsPerPage: InputMaybe<FieldSelectorEnum>;
+  readonly readingSettingsShowOnFront: InputMaybe<FieldSelectorEnum>;
   readonly writingSettingsDefaultCategory: InputMaybe<FieldSelectorEnum>;
   readonly writingSettingsDefaultPostFormat: InputMaybe<FieldSelectorEnum>;
   readonly writingSettingsUseSmilies: InputMaybe<FieldSelectorEnum>;
@@ -66006,7 +66030,10 @@ type WpSettingsFilterInput = {
   readonly generalSettingsTimezone: InputMaybe<StringQueryOperatorInput>;
   readonly generalSettingsTitle: InputMaybe<StringQueryOperatorInput>;
   readonly generalSettingsUrl: InputMaybe<StringQueryOperatorInput>;
+  readonly readingSettingsPageForPosts: InputMaybe<IntQueryOperatorInput>;
+  readonly readingSettingsPageOnFront: InputMaybe<IntQueryOperatorInput>;
   readonly readingSettingsPostsPerPage: InputMaybe<IntQueryOperatorInput>;
+  readonly readingSettingsShowOnFront: InputMaybe<StringQueryOperatorInput>;
   readonly writingSettingsDefaultCategory: InputMaybe<IntQueryOperatorInput>;
   readonly writingSettingsDefaultPostFormat: InputMaybe<StringQueryOperatorInput>;
   readonly writingSettingsUseSmilies: InputMaybe<BooleanQueryOperatorInput>;
@@ -66024,7 +66051,10 @@ type WpSettingsSortInput = {
   readonly generalSettingsTimezone: InputMaybe<SortOrderEnum>;
   readonly generalSettingsTitle: InputMaybe<SortOrderEnum>;
   readonly generalSettingsUrl: InputMaybe<SortOrderEnum>;
+  readonly readingSettingsPageForPosts: InputMaybe<SortOrderEnum>;
+  readonly readingSettingsPageOnFront: InputMaybe<SortOrderEnum>;
   readonly readingSettingsPostsPerPage: InputMaybe<SortOrderEnum>;
+  readonly readingSettingsShowOnFront: InputMaybe<SortOrderEnum>;
   readonly writingSettingsDefaultCategory: InputMaybe<SortOrderEnum>;
   readonly writingSettingsDefaultPostFormat: InputMaybe<SortOrderEnum>;
   readonly writingSettingsUseSmilies: InputMaybe<SortOrderEnum>;

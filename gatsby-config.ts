@@ -104,36 +104,33 @@ const config: GatsbyConfig = {
     {
        resolve: "gatsby-source-wordpress",
       options: {
-    url: process.env.GATSBY_GRAPHQL_URL, // Using your existing variable
-    verbose: true,
-    debug: {
-      preview: isPreviewMode, // Enable preview mode conditionally
-      timeBuildSteps: true,
-      graphql: {
-        showQueryVarsOnError: true,
-        showQueryOnError: true,
-        writeQueriesToDisk: true,
-      },
-    },
-    develop: {
-      hardCacheData: !isPreviewMode, // Disable cache when in preview mode
-      hardCacheMediaFiles: !isPreviewMode,
-    },
-    production: {
-      hardCacheMediaFiles: true,
-      allow404Images: true,
-      allow401Images: true,
-    },
-    // Add preview configuration
-    preview: {
-      sourceNodeName: "allWpContentNode",
-    },
-    schema: {
-      timeout: 600000,
-      perPage: isPreviewServer ? 5 : 20,
-      requestConcurrency: isPreviewServer ? 1 : 5,
-      previewRequestConcurrency: isPreviewServer ? 1 : 3,
-    },
+        url: "https://vieren.crea8ivestaging.com/graphql",
+        verbose: true,
+        debug: {
+          preview: true,
+          timeBuildSteps: true,
+          graphql: {
+            showQueryVarsOnError: true,
+            showQueryOnError: true,
+            writeQueriesToDisk: true,
+          },
+        },
+        develop: {
+          hardCacheData: true,
+          hardCacheMediaFiles: false,
+        },
+        production: {
+          hardCacheMediaFiles: false,
+          allow404Images: true,
+          allow401Images: true,
+        },
+        schema: {
+  timeout: 600000,
+  perPage: process.env.NODE_ENV === 'development' ? 5 : 20,
+  requestConcurrency: process.env.NODE_ENV === 'development' ? 2 : 5,
+  previewRequestConcurrency: process.env.NODE_ENV === 'development' ? 1 : 3,
+},
+
         type: {
           Category: {
             excludeFieldNames: [
