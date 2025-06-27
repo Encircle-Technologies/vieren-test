@@ -5,20 +5,11 @@ import { getLayouts } from "../utils/layout/layouts"
 import Head from "../components/Layout/Head"
 
 export default function Page({ location, data }) {
-  const isPreview =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("gatsby_preview") === "true"
-
-
   useEffect(() => {
     if (location.pathname.includes("/shop")) {
       trackPLPView()
     }
   }, [location])
-
-   if (!data?.wpPage) {
-    return isPreview ? <p>Loading preview data...</p> : <p>Page not found.</p>
-  }
 
   if (data?.wpPage?.template?.__typename === "WpTemplate_2021Default") {
     return (

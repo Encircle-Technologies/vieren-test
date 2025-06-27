@@ -4,13 +4,7 @@ require("dotenv").config({ path: `.env` })
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-// const isNetlify = process.env.NETLIFY === 'true'
-
-// const isPreviewServer = process.env.NETLIFY_DEV === 'true'
-
 const isNetlify = process.env.NETLIFY === 'true'
-const isPreviewServer = process.env.NETLIFY_DEV === 'true'
-const isPreviewMode = process.env.GATSBY_PREVIEW_MODE === 'true'
 
 const config: GatsbyConfig = {
   flags: {
@@ -102,9 +96,9 @@ const config: GatsbyConfig = {
       },
     },
     {
-       resolve: "gatsby-source-wordpress",
+      resolve: "gatsby-source-wordpress",
       options: {
-        url: "https://vieren.crea8ivestaging.com/graphql",
+        url: `${process.env.GRAPHQL_URL}`,
         verbose: true,
         debug: {
           preview: true,
@@ -117,20 +111,19 @@ const config: GatsbyConfig = {
         },
         develop: {
           hardCacheData: true,
-          hardCacheMediaFiles: false,
+          hardCacheMediaFiles: true,
         },
         production: {
-          hardCacheMediaFiles: false,
+          hardCacheMediaFiles: true,
           allow404Images: true,
           allow401Images: true,
         },
         schema: {
-  timeout: 600000,
-  perPage: process.env.NODE_ENV === 'development' ? 5 : 20,
-  requestConcurrency: process.env.NODE_ENV === 'development' ? 2 : 5,
-  previewRequestConcurrency: process.env.NODE_ENV === 'development' ? 1 : 3,
-},
-
+          timeout: 600000,
+          perPage: isNetlify ? 10 : 20,
+          requestConcurrency: isNetlify ? 3 : 5,
+          previewRequestConcurrency: isNetlify ? 2 : 3,
+        },
         type: {
           Category: {
             excludeFieldNames: [
@@ -256,17 +249,17 @@ const config: GatsbyConfig = {
         },
       },
     },
-    ...(!isNetlify ? [
-  {
-    resolve: "gatsby-plugin-sharp",
-    options: {
-      defaults: {},
-      failOn: "none",
-    },
-  },
-  "gatsby-transformer-sharp",
-  "gatsby-plugin-image",
-] : []),
+     ...(!isNetlify ? [
+      {
+        resolve: "gatsby-plugin-sharp",
+        options: {
+          defaults: {},
+          failOn: "none",
+        },
+      },
+      "gatsby-transformer-sharp",
+      "gatsby-plugin-image",
+    ] : []),
     "gatsby-transformer-sharp",
     "gatsby-plugin-image",
     "gatsby-plugin-styled-components",
