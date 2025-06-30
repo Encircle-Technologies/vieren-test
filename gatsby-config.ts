@@ -120,9 +120,9 @@ const config: GatsbyConfig = {
         },
         schema: {
           timeout: 600000,
-          perPage: isNetlify ? 10 : 20,
-          requestConcurrency: isNetlify ? 3 : 5,
-          previewRequestConcurrency: isNetlify ? 2 : 3,
+          perPage: isNetlify ? 10 : 10,
+          requestConcurrency: isNetlify ? 3 : 3,
+          previewRequestConcurrency: isNetlify ? 2 : 2,
         },
         type: {
           Category: {

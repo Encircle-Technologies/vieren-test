@@ -1,15 +1,32 @@
-[dev]
-  command="yarn develop"
-  functions="static/functions"
-  targetPort=8000
-
 [build]
-  functions="static/functions"
+  publish = "public"
+  command = "gatsby build"
+
+[dev]
+  command = "gatsby develop -H 0.0.0.0 -p 8000"
+  port = 8000
+  publish = "public"
+
+[context.production.environment]
+  NODE_VERSION = "22"
+  GATSBY_LOGGER = "yurnalist"
+  ENABLE_GATSBY_REFRESH_ENDPOINT = "true"
+  GATSBY_PRECOMPILE_DEVELOP_FUNCTIONS = "true"
+
+[context.deploy-preview]
+  command = "gatsby build"
+  environment = { ENABLE_GATSBY_REFRESH_ENDPOINT = "true" }
+
+[functions]
+  directory = "static/functions"
 
 [build.environment]
   NODE_OPTIONS = "--max_old_space_size=4096"
   GATSBY_CPU_COUNT = "2"
-  GATSBY_CONCURRENT_DOWNLOAD = "5"
+  GATSBY_CONCURRENT_DOWNLOAD = "3"
+  GATSBY_LOGGER = "yurnalist"
+  ENABLE_GATSBY_REFRESH_ENDPOINT = "true"
+  GATSBY_PRECOMPILE_DEVELOP_FUNCTIONS = "true"
 
 [[plugins]]
   package = "@netlify/plugin-gatsby"
