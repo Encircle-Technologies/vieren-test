@@ -1,13 +1,11 @@
 [build]
   publish = "public"
-  command = "yarn build"
+  command = "gatsby build"
 
 [dev]
-  command = "yarn dev"
-  port = 8000
-  targetPort = 8888
+  command = "gatsby develop -H 0.0.0.0 -p 8888"
+  port = 8888
   publish = "public"
-  autoLaunch = false
 
 [context.production.environment]
   NODE_VERSION = "22"
@@ -16,20 +14,8 @@
   GATSBY_PRECOMPILE_DEVELOP_FUNCTIONS = "true"
 
 [context.deploy-preview]
-  command = "yarn build"
-  
-  [context.deploy-preview.environment]
-    NODE_VERSION = "22"
-    GATSBY_LOGGER = "yurnalist"
-    ENABLE_GATSBY_REFRESH_ENDPOINT = "true"
-    GATSBY_PRECOMPILE_DEVELOP_FUNCTIONS = "true"
-    # Optimize for preview builds
-    GATSBY_CPU_COUNT = "1"
-    GATSBY_CONCURRENT_DOWNLOAD = "2"
-    NODE_OPTIONS = "--max_old_space_size=3072"
-
-[context.branch-deploy]
-  command = "yarn build"
+  command = "gatsby build"
+  environment = { ENABLE_GATSBY_REFRESH_ENDPOINT = "true" }
 
 [functions]
   directory = "static/functions"
