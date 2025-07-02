@@ -4,7 +4,7 @@
 
 [dev]
   command = "gatsby develop -H 0.0.0.0 -p 8000"
-  port = 8000
+  port = 8888
   publish = "public"
 
 [context.production.environment]
